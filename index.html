@@ -14,6 +14,12 @@
 
         <script>
 
+            /**
+             * Erstellt n Klappuhr Ziffern
+             * @param {number} from Anfangswert der Werte dieser Stelle (meist 0)
+             * @param {number} to   Endwert der Werte dieser Stelle (meist 9)
+             * @param {number} n    Anzahl der zu erstellenden Ziffern
+             */
             function createDigits(from, to, n)
             {
                 for(j=n-1; j >= 0; j--)
@@ -22,6 +28,12 @@
                 }
             }
 
+            /**
+             * Fügt dem div der Klasse flipTimer eine Klappuhr Ziffer hinzu.
+             * @param {number} from Anfangswert der Werte dieser Stelle (meist 0)
+             * @param {number} to   Endwert der Werte dieser Stelle (meist 9)
+             * @param {number} n    eindeutiger, fortlaufende Index dieser Stelle
+             */
             function setUpDigit(from, to, n)
             {
                 $div = $(".flipTimer");
@@ -38,6 +50,11 @@
                 $div.find("div#"+n).children().last().addClass("previous").addClass("last");
             }
 
+            /**
+             * Setzt die Stellen mit den Indizis von from bis to auf nicht übertragend. D.h. dass bei einem Überlauf von 9 auf 0 nichts weiter passiert. Die nächste Stelle wird *nicht* um 1 erhöht.
+             * @param {number} from Der Anfangsindex (inklusiv)
+             * @param {number} to   Der Endindex (inklusiv)
+             */
             function setIndeterminate(from, to)
             {
                 for(i=from; i <= to; i++)
@@ -46,6 +63,11 @@
                 }
             }
 
+            /**
+             * Setzt die Stellen mit den Indizis von from bis to auf übertragend. D.h. dass bei einem Überlauf von 9 auf 0 die nächste Stelle um 1 erhöht wird.
+             * @param {number} from Der Anfangsindex (inklusiv)
+             * @param {number} to   Der Endindex (inklusiv)
+             */
             function setDeterminate(from, to)
             {
                 for(i=from; i <= to; i++)
@@ -54,6 +76,11 @@
                 }
             }
 
+            /**
+             * Setzt die jeweilige Stelle auf den nächsten Wert. Nach 9 wird wider bei 0 angefangen.
+             * Ein automatischer Übertrag auf die nächste Stelle findet statt, kann aber abgestellt werden.
+             * @param {object} el Das Div Element mit der Klasse digit-set dessen Stelle inkrementiert werden soll
+             */
             function tickElement(el)
             {
                 $current = el.find(".active")
@@ -73,6 +100,11 @@
                 }
             }
 
+            /**
+             * Setzt die jeweilige Stelle auf den nächsten Wert. Nach 9 wird wider bei 0 angefangen.
+             * Ein automatischer Übertrag auf die nächste Stelle findet statt, kann aber abgestellt werden.
+             * @param {number} n Index der Stelle von hinten
+             */
             function tick(n)
             {
                 $div = $(".flipTimer").find("div#"+n);
