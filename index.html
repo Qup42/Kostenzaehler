@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/flipTimer.css" />
+        <style>
+            body {
+                background-color: #b8d6df;
+            }
+            .flipTimer {
+                margin: 100px 100px 0;
+            }
+        </style>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script>
+
+            function createDigits(from, to, n)
+            {
+                for(j=n-1; j >= 0; j--)
+                {
+                    setUpDigit(from, to, j);
+                }
+            }
+
+            function setUpDigit(from, to, n)
+            {
+                $div = $(".flipTimer");
+                $builtHtml = '<div class="digit-set" id="'+n+'">'
+                for(i=from; i <= to; i++)
+                {
+                    $builtHtml += '<div class="digit"><div class="digit-top"><span class="digit-wrap">'+i+'</span></div><div class="shadow-top"></div><div class="digit-bottom"><span class="digit-wrap">'+i+'</span></div><div class="shadow-bottom"></div></div>'
+                }
+                $builtHtml += '</div>'
+
+                $div.append($builtHtml)
+
+                $div.find("div#"+n).children().first().addClass("active");
+                $div.find("div#"+n).children().last().addClass("previous").addClass("last");
+            }
+
+            function setIndeterminate(from, to)
+            {
+                for(i=from; i <= to; i++)
+                {
+                    $("div#"+i).children().last().addClass("indeterminate")
+                }
+            }
+
+            function setDeterminate(from, to)
+            {
+                for(i=from; i <= to; i++)
+                {
+                    $("div#"+i).children().last().removeClass("indeterminate")
+                }
+            }
+
+            function tickElement(el)
+            {
+                $current = el.find(".active")
+                el.find(".previous").removeClass("previous")
+                $current.removeClass("active").addClass("previous")
+                if($current.hasClass("last"))
+                {
+                    $current.parent().children().first().addClass("active")
+                    if(!$current.hasClass("indeterminate"))
+                    {
+                        tickElement($current.parent().prev())
+                    }
+                }
+                else
+                {
+                    $current.next().addClass("active")
+                }
+            }
+
+            function tick(n)
+            {
+                $div = $(".flipTimer").find("div#"+n);
+                $current = $div.find(".active")
+                $div.find(".previous").removeClass("previous")
+                $current.removeClass("active").addClass("previous")
+                if($current.hasClass("last"))
+                {
+                    $current.parent().children().first().addClass("active")
+                    if(!$current.hasClass("indeterminate"))
+                    {
+                        tickElement($current.parent().prev())
+                    }
+                }
+                else
+                {
+                    $current.next().addClass("active")
+                }
+            }
+
+            $(document).ready(function() {
+                createDigits(0, 9, 10);
+
+                $speed = 1234567;
+                setIndeterminate(0, 5)
+
+                setInterval(function() {
+                    tick(0);
+                }, 1000/7);
+                setInterval(function() {
+                    tick(1);
+                }, 1000/6);
+                setInterval(function() {
+                    tick(2);
+                }, 1000/5);
+                setInterval(function() {
+                    tick(3);
+                }, 1000/4);
+                setInterval(function() {
+                    tick(4);
+                }, 1000/3);
+                setInterval(function() {
+                    tick(5);
+                }, 1000/2);
+                setInterval(function() {
+                    tick(6);
+                }, 1000/1);
+            });
+        </script>
+    </head>
+    <body>
+        <div class="flipTimer">
+            <!--<div class="hours"></div>
+<div class="minutes"></div>
+<div class="seconds"></div>-->
+        </div>
+    </body>
+</html>
