@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" href="css/flipTimer.css" />
         <style>
+            /*Damit es ein bisschen schöner aussieht*/
             body {
                 background-color: #b8d6df;
             }
@@ -126,11 +127,14 @@
             }
 
             $(document).ready(function() {
+                //10 Stellen erstellen
                 createDigits(0, 9, 10);
 
-                $speed = 1234567;
+                //Stellen so zählen lassen, als würde der Wert pro Sekunde um 1234567 steigen.
+                //Alle bis auf die höchste Stelle habe ich einzeln und ohne übertrag gemacht, weil die Geschwindigkeit sonst nicht erreicht würde.
+                //Die Funktionsaufrufe brauchen so lange, dass pro Sekunde max. 100 möglich wären.
+                //Das werde ich in Zukunft noch so ändern, dass man einfach nur den Wert pro Sekunde eingibt.
                 setIndeterminate(0, 5)
-
                 setInterval(function() {
                     tick(0);
                 }, 1000/7);
