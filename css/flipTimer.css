@@ -1,3 +1,8 @@
+/*
+Hier habe ich nichts dran verändert. Dieses CSS ist genau so, wie es von der Bibliothek kam. Quelle: https://www.jqueryscript.net/time-clock/Flip-Clock-Style-jQuery-Countdown-Count-Up-Timer-Plugin-flipTimer.html
+Ich musste hier bisher nichts ändern. Ich habe mal mit der Zeit zum wechseln einer Ziffer rumgespielt. (Mit ersetzen alle Aufkommen von 0.3s durch etwas anderes ersetzen.)
+Der Wert sollte nicht weniger als 0.15s sein.
+*/
 @-webkit-keyframes flipTop {
   0% {
     -webkit-transform: perspective(400px) rotateX(0deg); }
