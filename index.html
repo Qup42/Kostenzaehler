@@ -126,36 +126,59 @@
                 }
             }
 
+            /**
+             * Gibt 1000 durch die angebene Stelle der Zahl von hinten an. Gibt es diese Stelle nicht, so wird der maximale Wert für JS Timeouts zurückgegeben.
+             */
+            function getTimeoutForDigitOfNumber(number, digit)
+            {
+                return (digit >= number.toString().length) ? 2147483647 : 1000/(number.toString())[number.toString().length - 1 - digit]
+            }
+
             $(document).ready(function() {
                 //10 Stellen erstellen
                 createDigits(0, 9, 10);
 
+                //Einfach die gewünschte Geschwindigkeit einstellen. Der Zähler zählt den angegebene Wert pro Sekunde hoch.
+                $speed = 1234567;
                 //Stellen so zählen lassen, als würde der Wert pro Sekunde um 1234567 steigen.
                 //Alle bis auf die höchste Stelle habe ich einzeln und ohne übertrag gemacht, weil die Geschwindigkeit sonst nicht erreicht würde.
                 //Die Funktionsaufrufe brauchen so lange, dass pro Sekunde max. 100 möglich wären.
                 //Das werde ich in Zukunft noch so ändern, dass man einfach nur den Wert pro Sekunde eingibt.
-                setIndeterminate(0, 5)
+                var inderterminateDigits = $speed.toString().length-2
+                if(inderterminateDigits >= 0)
+                {
+                    setIndeterminate(0, inderterminateDigits)
+                }
                 setInterval(function() {
                     tick(0);
-                }, 1000/7);
+                }, getTimeoutForDigitOfNumber($speed, 0));
                 setInterval(function() {
                     tick(1);
-                }, 1000/6);
+                }, getTimeoutForDigitOfNumber($speed, 1));
                 setInterval(function() {
                     tick(2);
-                }, 1000/5);
+                }, getTimeoutForDigitOfNumber($speed, 2));
                 setInterval(function() {
                     tick(3);
-                }, 1000/4);
+                }, getTimeoutForDigitOfNumber($speed, 3));
                 setInterval(function() {
                     tick(4);
-                }, 1000/3);
+                }, getTimeoutForDigitOfNumber($speed, 4));
                 setInterval(function() {
                     tick(5);
-                }, 1000/2);
+                }, getTimeoutForDigitOfNumber($speed, 5));
                 setInterval(function() {
                     tick(6);
-                }, 1000/1);
+                }, getTimeoutForDigitOfNumber($speed, 6));
+                setInterval(function() {
+                    tick(7);
+                }, getTimeoutForDigitOfNumber($speed, 7));
+                setInterval(function() {
+                    tick(8);
+                }, getTimeoutForDigitOfNumber($speed, 8));
+                setInterval(function() {
+                    tick(9);
+                }, getTimeoutForDigitOfNumber($speed, 9));
             });
         </script>
     </head>
