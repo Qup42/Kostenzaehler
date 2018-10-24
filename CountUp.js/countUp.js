@@ -23,7 +23,7 @@
 // duration = duration of animation in seconds, default 2
 // options = optional object of options (see below)
 
-var CountUp = function(target, startVal, endVal, decimals, duration, options) {
+var CountUp = function(target, speed, startVal, endVal, decimals, duration, options) {
 
 	var self = this;
 	self.version = function () { return '1.9.3'; };
@@ -31,7 +31,7 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 	// default options
 	self.options = {
 		useEasing: false,//true, // toggle easing
-        speed: 123456,
+        //speed: 123456,
 		useGrouping: true, // 1,000,000 vs 1000000
 		separator: ',', // character to use as a separator
 		decimal: '.', // character to use as a decimal
@@ -130,6 +130,7 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 			return false;
 		}
 		self.startVal = Number(startVal);
+        self.speed = Number(speed);
 		self.endVal = Number(endVal);
 		// error checks
 		if (ensureNumber(self.startVal) && ensureNumber(self.endVal)) {
@@ -139,7 +140,7 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 			self.countDown = (self.startVal > self.endVal);
 			self.frameVal = self.startVal;
 			self.initialized = true;
-            self.speed = 123456;
+            //self.speed = 123456;
 			return true;
 		}
 		else {
