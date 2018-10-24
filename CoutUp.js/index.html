@@ -5,20 +5,24 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="countUp.js"></script>
     <script>
-        function animate()
+        function animateCountUp()
         {
-            var numAnim = new CountUp("element", 0, 100000, 0, 10, {useEasing: false});
+            var numAnim = new CountUp("element", 0, 100000);
             if (!numAnim.error) {
                 numAnim.start();
             } else {
                 console.error(numAnim.error);
             }
         }
+
+        /*$("#element").click(function() {
+            animate();
+        } );*/
     </script>
     <title></title>
 </head>
 
 <body>
-    <p id="element">Hier wird die Magie stattfinden.</p>
+    <p id="element" style="font-size:1500%" onclick="animateCountUp()">Hier wird die Magie stattfinden.</p>
 </body>
 </html>

@@ -30,7 +30,8 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 
 	// default options
 	self.options = {
-		useEasing: true, // toggle easing
+		useEasing: false,//true, // toggle easing
+        speed: 123456,
 		useGrouping: true, // 1,000,000 vs 1000000
 		separator: ',', // character to use as a separator
 		decimal: '.', // character to use as a decimal
@@ -134,10 +135,11 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 		if (ensureNumber(self.startVal) && ensureNumber(self.endVal)) {
 			self.decimals = Math.max(0, decimals || 0);
 			self.dec = Math.pow(10, self.decimals);
-			self.duration = Number(duration) * 1000 || 2000;
+			self.duration = Number(duration) * 1000 || 1000;
 			self.countDown = (self.startVal > self.endVal);
 			self.frameVal = self.startVal;
 			self.initialized = true;
+            self.speed = 123456;
 			return true;
 		}
 		else {
@@ -180,7 +182,8 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 			if (self.countDown) {
 				self.frameVal = self.startVal - ((self.startVal - self.endVal) * (progress / self.duration));
 			} else {
-				self.frameVal = self.startVal + (self.endVal - self.startVal) * (progress / self.duration);
+                self.frameVal = self.startVal + self.speed * (progress / self.duration);
+				//self.frameVal = self.startVal + (self.endVal - self.startVal) * (progress / self.duration);
 			}
 		}
 
@@ -188,7 +191,7 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 		if (self.countDown) {
 			self.frameVal = (self.frameVal < self.endVal) ? self.endVal : self.frameVal;
 		} else {
-			self.frameVal = (self.frameVal > self.endVal) ? self.endVal : self.frameVal;
+			//self.frameVal = (self.frameVal > self.endVal) ? self.endVal : self.frameVal;
 		}
 
 		// decimal
@@ -197,12 +200,13 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 		// format and print value
 		self.printValue(self.frameVal);
 
+        self.rAF = requestAnimationFrame(self.count);
 		// whether to continue
-		if (progress < self.duration) {
+		/*if (progress < self.duration) {
 			self.rAF = requestAnimationFrame(self.count);
 		} else {
 			if (self.callback) self.callback();
-		}
+		}*/
 	};
 	// start your animation
 	self.start = function(callback) {
