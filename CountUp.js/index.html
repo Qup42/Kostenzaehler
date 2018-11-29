@@ -21,14 +21,22 @@
         {
             animateCountUp($('input[name="speed"]').val());
         }
+
+        function setFitWindowFontSize()
+        {
+            var width = $(window).width();
+            console.log(width);
+            var n = $("#element")[0].innerHTML.length + 1;
+            var characterWdith = width / n;
+            var fontSize = characterWdith / 9.781 * 18;
+            $("#element").css("font-size", fontSize);
+        }
     </script>
     <title></title>
 </head>
 
 <body>
     <p id="element" style="font-size:1000%; font-family: 'Roboto Mono', monospace;" align="right" onclick="animateCountUp(123456)">Klick mich, um den Timer zu starten.</p>
-
-
 
     <p>Geschwindigkeit (Erhöhung pro Sekunde):</p>
         <input type="text" name="speed" />
