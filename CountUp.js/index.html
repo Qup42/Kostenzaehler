@@ -22,14 +22,34 @@
             animateCountUp($('input[name="speed"]').val());
         }
 
+        /**
+         * Adjusts the font size according to the number of characters and the available space.
+         * First a rough estimate ist done by multipyling the space available for one character by the heigth to width ratio of this monospace font. This will always overflow because the font-size is set. The result will be larger because of whitespace around chars.
+         * Then the size is decremented as long as it overflows the window.
+         */
         function setFitWindowFontSize()
         {
             var width = $(window).width();
+            var n = $("#element")[0].innerHTML.length /*+ 1*/;
             console.log(width);
-            var n = $("#element")[0].innerHTML.length + 1;
+            console.log(n);
             var characterWdith = width / n;
             var fontSize = characterWdith / 9.781 * 18;
             $("#element").css("font-size", fontSize);
+            while(isOverflowing())
+            {
+                fontSize -= 10;
+                $("#element").css("font-size", fontSize);
+            }
+        }
+
+        /**
+         * Checks if the body is overflowing, i.e. having a scrollbar in either horizontal or vertical direction.
+         */
+        function isOverflowing() {
+            var el = $("body")[0];
+            return el.clientWidth < el.scrollWidth
+                || el.clientHeight < el.scrollHeight;
         }
     </script>
     <title></title>

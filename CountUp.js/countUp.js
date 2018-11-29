@@ -183,6 +183,7 @@ var CountUp = function(target, speed, startVal, endVal, decimals, duration, opti
 			if (self.countDown) {
 				self.frameVal = self.startVal - ((self.startVal - self.endVal) * (progress / self.duration));
 			} else {
+                //the path that ist taken
                 self.frameVal = self.startVal + self.speed * (progress / self.duration);
 				//self.frameVal = self.startVal + (self.endVal - self.startVal) * (progress / self.duration);
 			}
@@ -208,6 +209,13 @@ var CountUp = function(target, speed, startVal, endVal, decimals, duration, opti
 		} else {
 			if (self.callback) self.callback();
 		}*/
+
+        if(String(self.frameVal).length!=String(self.lastValue).length)
+        {
+            setFitWindowFontSize();
+        }
+
+        self.lastValue = self.frameVal;
 	};
 	// start your animation
 	self.start = function(callback) {
