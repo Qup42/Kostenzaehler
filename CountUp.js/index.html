@@ -16,12 +16,19 @@
                 console.error(numAnim.error);
             }
             goFullscreen();
+            removeConfigElements();
         }
 
         function startTimer()
         {
             animateCountUp($('input[name="speed"]').val());
             goFullscreen();
+            removeConfigElements();
+        }
+
+        function removeConfigElements()
+        {
+            $("#config").css("visibility", "hidden");
         }
 
         function goFullscreen()
@@ -75,10 +82,14 @@
 <body>
     <p id="element" style="font-size:1000%; font-family: 'Roboto Mono', monospace;" align="right" onclick="animateCountUp(123456)">Klick mich, um den Timer zu starten.</p>
 
-    <p>Geschwindigkeit (Erhöhung pro Sekunde):</p>
-        <input type="text" name="speed" />
 
-    <button onclick="startTimer()">Starten</button>
-    <button onclick="goFullscreen()">Vollbildschirm</button>
+
+    <div id="config">
+        <p>Geschwindigkeit (Erhöhung pro Sekunde):</p>
+        <input type="text" name="speed" />
+        <button onclick="startTimer()">Starten</button>
+        <button onclick="goFullscreen()">Vollbildschirm</button>
+    </div>
+
 </body>
 </html>
