@@ -15,11 +15,28 @@
             } else {
                 console.error(numAnim.error);
             }
+            goFullscreen();
         }
 
         function startTimer()
         {
             animateCountUp($('input[name="speed"]').val());
+            goFullscreen();
+        }
+
+        function goFullscreen()
+        {
+            var elem = document.documentElement;
+            //var elem = $("body")[0];
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+            }
         }
 
         /**
