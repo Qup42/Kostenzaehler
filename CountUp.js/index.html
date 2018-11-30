@@ -96,11 +96,11 @@
             console.log(n);
             var characterWdith = width / n;
             var fontSize = characterWdith / 9.781 * 18;
-            $("#element").css("font-size", fontSize);
+            $(".autosizeText").css("font-size", fontSize);
             while(isOverflowing())
             {
                 fontSize -= 10;
-                $("#element").css("font-size", fontSize);
+                $(".autosizeText").css("font-size", fontSize);
             }
         }
 
@@ -117,7 +117,7 @@
 </head>
 
 <body>
-    <p id="element" style="font-size:1000%; font-family: 'Roboto Mono', monospace;" align="right" onclick="animateCountUp(123456)">Klick mich, um den Timer zu starten.</p>
+    <p class="autosizeText" id="element" style="font-size:1000%;" align="right" onclick="animateCountUp(123456)">Klick mich, um den Timer zu starten.</p>
 
 
 
