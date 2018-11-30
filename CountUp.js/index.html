@@ -29,6 +29,17 @@
             removeConfigElements();
         }
 
+        function startTimeout()
+        {
+            if($("#startTime")[0].value!="")
+            {
+                startDateTime = new Date($("#startTime")[0].value);
+                checkTimeout();
+                goFullscreen();
+                removeConfigElements();
+            }
+        }
+
         function removeConfigElements()
         {
             $("#config").css("visibility", "hidden");
@@ -124,7 +135,9 @@
     <div id="config">
         <p>Geschwindigkeit (Erhöhung pro Sekunde):</p>
         <input type="text" name="speed" />
+        <input type="datetime-local" name="startTime" id="startTime"/>
         <button onclick="startTimer()">Starten</button>
+        <button onclick="startTimeout()">Zeitaktiviert starten</button>
         <button onclick="goFullscreen()">Vollbildschirm</button>
     </div>
 
