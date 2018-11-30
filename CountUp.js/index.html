@@ -8,7 +8,11 @@
     <script src="countUp.js"></script>
     <script>
         var startDateTime = new Date(2018, 10, 30, 15, 19, 00);
-        checkTimeout();
+        //checkTimeout();
+        $(document).ready(function() {
+            var actualDateTime = new Date();
+            $("#startTime")[0].value = actualDateTime.toISOString().substring(0, actualDateTime.toISOString().length-1);
+        });
 
         function animateCountUp(speed)
         {
