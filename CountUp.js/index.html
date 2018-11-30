@@ -7,6 +7,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="countUp.js"></script>
     <script>
+        var startDateTime = new Date(2018, 10, 30, 15, 19, 00);
+        checkTimeout();
+
         function animateCountUp(speed)
         {
             var numAnim = new CountUp("element", speed, 0, 100000);
@@ -29,6 +32,40 @@
         function removeConfigElements()
         {
             $("#config").css("visibility", "hidden");
+        }
+
+        function checkTimeout()
+        {
+            var currentDateTime = new Date();
+
+            if(startDateTime.getYear() == currentDateTime.getYear() &&
+                startDateTime.getMonth() == currentDateTime.getMonth() &&
+                startDateTime.getDay() == currentDateTime.getDay())
+            {
+                if(startDateTime.getHours()*60+startDateTime.getMinutes() > currentDateTime.getHours()*60+currentDateTime.getMinutes()+30)
+                {
+                    setTimeout(checkTimeout, 900000);
+                }
+                else if((startDateTime.getHours()*60+startDateTime.getMinutes())*60+startDateTime.getSeconds() > (currentDateTime.getHours()*60+currentDateTime.getMinutes())*60+currentDateTime.getSeconds()+30)
+                {
+                    setTimeout(checkTimeout, 15000);
+                }
+                else if((startDateTime.getHours()*60+startDateTime.getMinutes())*60+startDateTime.getSeconds() > (currentDateTime.getHours()*60+currentDateTime.getMinutes())*60+currentDateTime.getSeconds()+30)
+                {
+                    setTimeout(checkTimeout, 500);
+                }
+                else if(startDateTime.getHours() == currentDateTime.getHours() &&
+                       startDateTime.getMinutes() == currentDateTime.getMinutes() &&
+                       startDateTime.getSeconds() == currentDateTime.getSeconds())
+                {
+                    startTimer();
+                }
+                else if((startDateTime.getHours()*60+startDateTime.getMinutes())*60+startDateTime.getSeconds() > (currentDateTime.getHours()*60+currentDateTime.getMinutes())*60+currentDateTime.getSeconds())
+                {
+                    setTimeout(checkTimeout, 5);
+                }
+            }
+
         }
 
         function goFullscreen()
