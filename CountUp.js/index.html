@@ -7,8 +7,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="countUp.js"></script>
     <script>
-        var startDateTime = new Date(2018, 10, 30, 15, 19, 00);
-        //checkTimeout();
+        var startDateTime;
         $(document).ready(function() {
             var actualDateTime = new Date();
             $("#startTime")[0].value = actualDateTime.toISOString().substring(0, actualDateTime.toISOString().length-1);
