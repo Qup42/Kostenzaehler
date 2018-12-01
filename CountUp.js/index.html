@@ -21,15 +21,18 @@
             } else {
                 console.error(numAnim.error);
             }
-            goFullscreen();
+        }
+
+        function startTimerFromBtn()
+        {
+            animateCountUp($('input[name="speed"]').val());
             removeConfigElements();
+            goFullscreen();
         }
 
         function startTimer()
         {
             animateCountUp($('input[name="speed"]').val());
-            goFullscreen();
-            removeConfigElements();
         }
 
         function startTimeout()
@@ -139,7 +142,7 @@
         <p>Geschwindigkeit (Erhöhung pro Sekunde):</p>
         <input type="text" name="speed" />
         <input type="datetime-local" name="startTime" id="startTime"/>
-        <button onclick="startTimer()">Starten</button>
+        <button onclick="startTimerFromBtn()">Starten</button>
         <button onclick="startTimeout()">Zeitaktiviert starten</button>
         <button onclick="goFullscreen()">Vollbildschirm</button>
     </div>
