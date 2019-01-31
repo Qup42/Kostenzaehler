@@ -13,6 +13,23 @@
             $("#startTime")[0].value = actualDateTime.toISOString().substring(0, actualDateTime.toISOString().length-1);
         });
 
+        function pad(number) {
+            if (number < 10) {
+                return '0' + number;
+            }
+            return number;
+        }
+        Date.prototype.toISOString = function() {
+            return this.getUTCFullYear() +
+                '-' + pad(this.getUTCMonth() + 1) +
+                '-' + pad(this.getUTCDate()) +
+                'T' + pad(this.getHours()) +
+                ':' + pad(this.getUTCMinutes()) +
+                ':' + pad(this.getUTCSeconds()) +
+                '.' + (this.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+                'Z';
+        };
+
         function animateCountUp(speed)
         {
             var numAnim = new CountUp("element", speed, 0, 100000);
@@ -40,7 +57,7 @@
         {
             if($("#startTime")[0].value!="")
             {
-                startDateTime = new Date($("#startTime")[0].value);
+                startDateTime = (new Date($("#startTime")[0].value)).getTime();
                 checkTimeout();
                 goFullscreen();
                 removeConfigElements();
@@ -54,37 +71,18 @@
 
         function checkTimeout()
         {
-            var currentDateTime = new Date();
             console.log(".");
 
-            if(startDateTime.getYear() == currentDateTime.getYear() &&
-                startDateTime.getMonth() == currentDateTime.getMonth() &&
-                startDateTime.getDay() == currentDateTime.getDay())
+            var dt = startDateTime - Date.now();
+            console.log(Math.floor(dt/10));
+            if(dt > 0)
             {
-                if(startDateTime.getHours()*60+startDateTime.getMinutes() > currentDateTime.getHours()*60+currentDateTime.getMinutes()+30)
-                {
-                    setTimeout(checkTimeout, 900000);
-                }
-                else if((startDateTime.getHours()*60+startDateTime.getMinutes())*60+startDateTime.getSeconds() > (currentDateTime.getHours()*60+currentDateTime.getMinutes())*60+currentDateTime.getSeconds()+30)
-                {
-                    setTimeout(checkTimeout, 15000);
-                }
-                else if((startDateTime.getHours()*60+startDateTime.getMinutes())*60+startDateTime.getSeconds() > (currentDateTime.getHours()*60+currentDateTime.getMinutes())*60+currentDateTime.getSeconds()+30)
-                {
-                    setTimeout(checkTimeout, 500);
-                }
-                else if(startDateTime.getHours() == currentDateTime.getHours() &&
-                       startDateTime.getMinutes() == currentDateTime.getMinutes() &&
-                       startDateTime.getSeconds() == currentDateTime.getSeconds())
-                {
-                    startTimer();
-                }
-                else if((startDateTime.getHours()*60+startDateTime.getMinutes())*60+startDateTime.getSeconds() > (currentDateTime.getHours()*60+currentDateTime.getMinutes())*60+currentDateTime.getSeconds())
-                {
-                    setTimeout(checkTimeout, 5);
-                }
+                setTimeout(checkTimeout, Math.floor(dt/10));
             }
-
+            else
+            {
+                startTimer();
+            }
         }
 
         function goFullscreen()
