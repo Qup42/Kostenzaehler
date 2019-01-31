@@ -2,11 +2,8 @@ body {
     margin: 0px;
 }
 
-#element {
+.autosizeText {
     margin-top: 0px;
     margin-bottom: 0px;
-}
-
-.autosizeText {
     font-family: 'Roboto Mono', monospace;
 }
